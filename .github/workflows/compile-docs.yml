@@ -17,8 +17,11 @@ jobs:
         with:
           root_file: |
             cv.tex
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
+      - uses: "marvinpinto/action-automatic-releases@latest"
         with:
-          files: cv.pdf
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          title: "Development Build"
+          files: |
+            cv.pdf
