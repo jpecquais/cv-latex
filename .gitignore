@@ -3,5 +3,5 @@ cv.fdb_latexmk
 cv.fls
 cv.log
 cv.out
-cv.pdf
+# cv.pdf
 cv.synctex.gz
