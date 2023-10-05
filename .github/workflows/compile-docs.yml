@@ -17,11 +17,25 @@ jobs:
         with:
           root_file: |
             cv.tex
-      - uses: "marvinpinto/action-automatic-releases@latest"
+      # - uses: "marvinpinto/action-automatic-releases@latest"
+      #   with:
+      #     repo_token: "${{ secrets.GITHUB_TOKEN }}"
+      #     automatic_release_tag: "latest"
+      #     prerelease: true
+      #     title: "Development Build"
+      #     files: |
+      #       cv.pdf
+      - name: FTP site
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "latest"
-          prerelease: true
-          title: "Development Build"
-          files: |
-            cv.pdf
+          server: ftp.cluster028.hosting.ovh.net
+          username: jeanloupez
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./public/
+          server-dir: ./www/media/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            cv.tex
+        #   git-ftp-args: --insecure --all
